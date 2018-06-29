@@ -1,5 +1,5 @@
 function result = smallWorldNet(casedata,N,m,p,Rm,Xm)
-matrix = zeros(N,N);
+matrix = zeros(N,N);%
 R = rand(N,N)*Rm;
 X = rand(N,N)*Xm;
 for i=m+1:N- m
