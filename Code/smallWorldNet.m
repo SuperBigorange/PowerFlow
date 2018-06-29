@@ -1,6 +1,6 @@
-function result = smallWorldNet(casedata,m,p,Rm,Xm)
+function [matrix,result] = smallWorldNet(casedata,m,p,Rm,Xm)
 myMpc=loadcase(casedata);
-[N,~]=size(myMpc);
+[N,~]=size(myMpc.bus);
 matrix = zeros(N,N);%
 R = rand(N,N)*Rm;
 X = rand(N,N)*Xm;
@@ -17,12 +17,16 @@ for i=1:m
     matrix(i,N- m+i:N)=1;
     matrix(N- m+i:N,i)=1;
 end
-kk=tril((rand(N)<p),-1)+triu((rand(N)<p)',0);
+k=(rand(N)<p);
+kk=tril(k,-1);
+kkk=triu(k',0);
+kkkk=kkk+kk;
 for i=1:N
-    kk(i,i)=0;
+    kkkk(i,i)=0;
 end
+
 % Random add edge
-matrix = logical(matrix + kk);
+matrix = logical(matrix + kkkk);
 matrix = matrix -diag(diag(matrix));
 count=0;
 for i=1:N
