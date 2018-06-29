@@ -1,4 +1,6 @@
-function result = smallWorldNet(casedata,N,m,p,Rm,Xm)
+function result = smallWorldNet(casedata,m,p,Rm,Xm)
+myMpc=loadcase(casedata);
+[N,~]=size(myMpc);
 matrix = zeros(N,N);%
 R = rand(N,N)*Rm;
 X = rand(N,N)*Xm;
@@ -42,14 +44,14 @@ for i=1:N
         end
     end
 end
-myMpc=loadcase(casedata);
-[mRaw,mCol]=size(last);
+
+[mRaw,~]=size(last);
 myMpc.branch=zeros(mRaw,13);
 myMpc.branch(:,13)=360;
 myMpc.branch(:,12)=-360;
 myMpc.branch(:,11)=1;
 myMpc.branch(:,1:4)=last;
 myMpc.branch
-result=delSide(myMpc);
+[~,~,~,result]=delSide(myMpc);
 
     
