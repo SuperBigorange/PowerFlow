@@ -25,7 +25,6 @@ minDvalue(branchRaw)=zeros;
 for j=1:branchRaw
     minDvalue(j)=abs(lossRatio-lossRatioTable(j));
 end
-
 [Y,U]=min(minDvalue);
 Y=lossRatioTable(U);
 
