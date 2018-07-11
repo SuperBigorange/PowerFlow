@@ -1,6 +1,7 @@
 function printDegree=getDegree(casedata)
 %本函数用于获得案例的无向图上各点的度
-%printDegree是返回度表，casedata是传入案例
+%   printDegree是返回度表
+%   casedata是传入案例
 
 %预处理
 myMpc=loadcase(casedata);                   %获取案例
@@ -14,7 +15,7 @@ number(myMpc.bus(busRaw,1),1)=zeros;         %初始化序号
 for i=1:busRaw
     number(myMpc.bus(i,1))=i;
 end
-
+%打印各节点度
 for j=1:branchRaw
         printDegree(number(myMpc.branch(j,1)),2)=printDegree(number(myMpc.branch(j,1)),2)+1;
         printDegree(number(myMpc.branch(j,2)),2)=printDegree(number(myMpc.branch(j,2)),2)+1;

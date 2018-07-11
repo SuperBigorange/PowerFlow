@@ -1,21 +1,32 @@
-function [matrix,result] = smallWorldNet(casedata,m,p,Rm,Xm)
-myMpc=loadcase(casedata);
-[N,~]=size(myMpc.bus);
-matrix = zeros(N,N);%
+function [matrix,lossRatioTable] = smallWorldNet(casedata,neighbNum,p,Rm,Xm)
+%   本函数使用NW小世界模型随机生成电网小世界图
+%   casedata是输入案例
+%   neighbNum是初始每个节点向与它最临近的neighbNum个节点连出neighbNum条边
+%   p是随机化生成边的概率
+%   Rm是R阻抗的的最大值
+%   Xm是X电感的最大值
+%   matrix是生成的小世界网络的关联矩阵
+%   lossRatioTable是运行删边算法后的线损表
+
+myMpc=loadcase(casedata);                   %获取案例
+[N,~]=size(myMpc.bus);                      %获取节点数
+matrix = zeros(N,N);                        %初始化关联矩阵
+%随机生成边矩阵
 R = rand(N,N)*Rm;
 X = rand(N,N)*Xm;
-for i=m+1:N- m
-    matrix(i,i- m:i+m)=1;
+
+for i=neighbNum+1:N- neighbNum
+    matrix(i,i- neighbNum:i+neighbNum)=1;
 end
-for i=1:m
-    matrix(i,1:i+m)=1;
+for i=1:neighbNum
+    matrix(i,1:i+neighbNum)=1;
 end
-for i=N- m+1:N
-    matrix(i,i- m:N)=1;
+for i=N- neighbNum+1:N
+    matrix(i,i- neighbNum:N)=1;
 end
-for i=1:m
-    matrix(i,N- m+i:N)=1;
-    matrix(N- m+i:N,i)=1;
+for i=1:neighbNum
+    matrix(i,N- neighbNum+i:N)=1;
+    matrix(N- neighbNum+i:N,i)=1;
 end
 k=(rand(N)<p);
 kk=tril(k,-1);
@@ -56,6 +67,6 @@ myMpc.branch(:,12)=-360;
 myMpc.branch(:,11)=1;
 myMpc.branch(:,1:4)=last;
 myMpc.branch
-[~,~,~,result]=delSide(myMpc);
+[~,~,~,lossRatioTable]=delSide(myMpc);
 
     

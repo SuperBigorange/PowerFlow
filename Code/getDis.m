@@ -1,6 +1,7 @@
 function table=getDis(casedata)
 %本函数用于获得案例的图上点关于平衡节点的拓补距离表
-%table是返回表，casedata是传入案例
+%   table是返回表
+%   casedata是传入案例
 
 %预先处理
 mpc = loadcase(casedata);       %获取案例
