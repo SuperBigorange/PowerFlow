@@ -1,7 +1,7 @@
 %本脚本用于保持图的拓补结构不变，随机生成边的大小进而进行删边处理
 
 n=100;                          %实验次数
-usedCase='case14';             %采用的案例
+usedCase='case145';             %采用的案例
 rmax=0.01;                      %r电阻的最大值
 xmax=0.01;                      %x电感的最大值
 
@@ -11,8 +11,8 @@ for i=1:n
     [lossRatio,U,Y] = randomValue(usedCase,rmax,xmax);
     T(i,:)=[lossRatio,U,Y];
 end
-%filename = 'delCmp.xlsx';
-%xlswrite(filename,T,1)
+filename = 'delCmp.xlsx';
+xlswrite(filename,T,8)
 x = 1:n;      %画图
 % plot(x,T(:,2));
 scatter(x,T(:,2))
