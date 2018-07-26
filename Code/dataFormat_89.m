@@ -5,7 +5,7 @@ for sheet = 6:6
     gra = xlsread(filename,sheet,'E:F');
     dig = xlsread(filename,sheet,'H:I');
     dis = xlsread(filename,sheet,'K:L');
-    Res = zeros(100,5);  %   边    度(1)  度（2）  距离(1)   距离（2） 
+    Res = zeros(100,7);  %   边  节点1   节点2   度1  度2    距离1    距离2 
     for i=1:100
         Res(i,1) = del(i,2);
         for j=1:length(dig)
@@ -22,7 +22,7 @@ for sheet = 6:6
                 s2 = dis(j,2);
             end
         end
-        Res(i,:) = [del(i,2),d1,d2,s1,s2];
+        Res(i,:) = [del(i,2),gra(del(i,2),1),gra(del(i,2),2),d1,d2,s1,s2];
     end
     xlswrite(filename_s,Res,sheet);
 end
