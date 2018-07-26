@@ -1,4 +1,4 @@
-function [matrix,lossRatioTable] = smallWorldNet(casedata,neighbNum,p,Rm,Xm)
+function [branchTable,branchMFit,degreeTable,disTable] = smallWorldNet(casedata,neighbNum,p,Rm,Xm)
 %   本函数使用NW小世界模型随机生成电网小世界图
 %   casedata是输入案例
 %   neighbNum是初始每个节点向与它最临近的neighbNum个节点连出neighbNum条边
@@ -15,6 +15,7 @@ matrix = zeros(N,N);                        %初始化关联矩阵
 R = rand(N,N)*Rm;
 X = rand(N,N)*Xm;
 
+%确定哪些地方需要赋值
 for i=neighbNum+1:N- neighbNum
     matrix(i,i- neighbNum:i+neighbNum)=1;
 end
@@ -66,7 +67,9 @@ myMpc.branch(:,13)=360;
 myMpc.branch(:,12)=-360;
 myMpc.branch(:,11)=1;
 myMpc.branch(:,1:4)=last;
-myMpc.branch
-[~,~,~,lossRatioTable]=delSide(myMpc);
+branchTable=myMpc.branch(:,1:2);
+degreeTable=getDegree(myMpc);
+disTable=getDis(myMpc);
+[~,branchMFit,~,~]=delSide(myMpc);
 
     
