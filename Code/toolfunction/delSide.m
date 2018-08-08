@@ -9,9 +9,13 @@ function [lossRatio,branchMFit,closestLossRatio,lossRatioTable]=delSide(casedata
 %计算删一条边后
 mpopt = mpoption('pf.alg', 'NR', 'pf.tol', 1e-4,'pf.nr.max_it',20,'out.all',0);%定义迭代方式
 myMpc = loadcase(casedata);             %获取案例
+
+%获得平衡节点
+balanceBus=myMpc.bus(myMpc.bus(:,2)==3,1);
+
 %就置一台发电机工作
 myMpc.gen(:,8)=0;
-myMpc.gen(1,8)=1;
+myMpc.gen(myMpc.gen(:,1)==balanceBus,8)=1;
 %%%%%%%%%%%%
 
 [branchRaw,~]=size(myMpc.branch);       %获得支路数

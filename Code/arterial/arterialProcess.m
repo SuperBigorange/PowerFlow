@@ -9,6 +9,7 @@ i=0;
 while i<calNum
     mpc=arterialCase(nodeNum,Pmax,Qmax,rmax,xmax);
     [lossRatioTable,success]=delNode(mpc);
+    i
     if success==1
         i=i+1;
         [num , deviation] = findClost( lossRatioTable(:,2) , -1 );

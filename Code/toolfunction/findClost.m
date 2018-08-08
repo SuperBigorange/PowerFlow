@@ -1,6 +1,7 @@
 function [ num , deviation ] = findClost( vector , position )
-%FINDCLOST 此处显示有关此函数的摘要
-%   此处显示详细说明
+%   找到向量中离标准值最接近的一个，返回值和误差
+%   vector是输入的向量，position为标准值所在的位置
+%   num是最接近的值所在的位置，deviation是误差
 if position==-1
     position=length(vector);
 end

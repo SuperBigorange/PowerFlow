@@ -1,5 +1,5 @@
-function mpc = arterialCase(nodeNum,Pmax,Qmax,rmax,xmax)
-%本函数生成干线式案例
+function mpc = chainCase(nodeNum,Pmax,Qmax,rmax,xmax)
+%本函数生成链式案例
 %nodeNum表示所有节点个数，默认干线节点外联1个节点枝干
 %Pmax，Qmax为随机生成P,Q的最大值
 %rmax，xmax为随机生成的r，x最大值
@@ -16,8 +16,7 @@ mpc.bus=zeros(nodeNum,13);
 mpc.bus(:,13)=0.94;
 mpc.bus(:,12)=1.06;
 mpc.bus(:,11)=1;
-mpc.bus(:,10)=0;
-mpc.bus(:,9)=-10*rand(nodeNum,1);
+mpc.bus(:,10)=230;
 mpc.bus(:,8)=1;
 mpc.bus(:,7)=1;
 mpc.bus(:,1)=1:nodeNum;

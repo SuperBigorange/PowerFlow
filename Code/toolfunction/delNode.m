@@ -1,4 +1,5 @@
 function [lossRatioTable,success]=delNode(casedata)
+%本函数用于计算删去一个度为1的节点后的线损
 mpopt = mpoption('pf.alg', 'NR', 'pf.tol', 1e-4,'pf.nr.max_it',20,'out.all',0);%定义迭代方式
 degreeTable=getDegree(casedata);                        %得到度表
 balanceNum= casedata.bus(casedata.bus(:,2)==3,1);       %获得平衡节点
