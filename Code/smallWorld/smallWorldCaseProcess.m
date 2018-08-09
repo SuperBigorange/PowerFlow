@@ -1,10 +1,13 @@
-function [ calTable ] = smallWorldCaseProcess( nodeNum,neighbNum,p,Pmax,Qmax,Rm,Xm )
-%SMALLWORLDPROCESS1 此处显示有关此函数的摘要
-%   此处显示详细说明
-calTable=[];
-for i=1:1
+function [ calTable ] = smallWorldCaseProcess( nodeNum,neighbNum,p,Pmax,Qmax,Rm,Xm,n)
+%	此函数对生成的小世界网络进行删边处理
+%   nodeNum是总节点个数，neighbNum是初始临近节点个数
+%   p是随机加边概率，Pmax，Qmax为随机生成P,Q的最大值
+%   rmax，xmax为随机生成的r，x最大值,n是迭代次数
+
+calTable=zeros(n,6);
+for i=1:n
     mpc = smallWorldCase(nodeNum,neighbNum,p,Pmax,Qmax,Rm,Xm);
-    [lossRatio,branchMFit,closestLossRatio,lossRatioTable]=delSide(mpc);
+    [~,branchMFit,~,~]=delSide(mpc);
     degreeTable=getDegree(mpc);
     calTable(i,1)=degreeTable(degreeTable(:,1)==mpc.branch(branchMFit,1),2);
     calTable(i,2)=degreeTable(degreeTable(:,1)==mpc.branch(branchMFit,2),2);

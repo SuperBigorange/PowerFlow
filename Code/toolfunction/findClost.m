@@ -8,7 +8,7 @@ end
 ref=vector(position);
 num=-1;
 deviation=1;
-for i=1:size(vector)
+for i=1:length(vector)
     if i==position 
         continue
     end
@@ -17,4 +17,3 @@ for i=1:size(vector)
         num=i;
     end
 end
-

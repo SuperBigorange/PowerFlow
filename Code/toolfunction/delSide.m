@@ -1,10 +1,10 @@
 function [lossRatio,branchMFit,closestLossRatio,lossRatioTable]=delSide(casedata)
 %本函数用于计算删去一条边后（图仍保持连通）的线损
 %   casedata是输入案例
-%   lossRatio是原线损
+%   lossRatio是原线损值
 %   branchMFit是删去后对线损影响最小的边号
 %   closestLossRatio是删去后影响最小的线损大小
-%   lossRatioTable是删去各边的线损表，最后一个元素是原线损
+%   lossRatioTable是删去各边的线损表
 
 %计算删一条边后
 mpopt = mpoption('pf.alg', 'NR', 'pf.tol', 1e-4,'pf.nr.max_it',20,'out.all',0);%定义迭代方式
